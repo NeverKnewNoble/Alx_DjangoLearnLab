@@ -1,45 +1,40 @@
 import django
-from django.conf import settings
-from django.core.management import execute_from_command_line
+import os
 
-# Configure Django settings
-settings.configure(
-    DEBUG=True,
-    INSTALLED_APPS=[
-        'django.contrib.contenttypes',
-        'django.contrib.auth',
-        'relationship_app',
-    ],
-    DATABASES={
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-        }
-    }
-)
+# Set up Django environment
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project_name.settings")
 django.setup()
 
 from relationship_app.models import Author, Book, Library, Librarian
 
-def query_all_books_by_author(author_name):
+# Query all books by a specific author
+def books_by_author(author_name):
     author = Author.objects.get(name=author_name)
     books = Book.objects.filter(author=author)
-    for book in books:
-        print(book.title)
+    return books
 
-def list_all_books_in_library(library_name):
+# List all books in a library
+def books_in_library(library_name):
     library = Library.objects.get(name=library_name)
     books = library.books.all()
-    for book in books:
-        print(book.title)
+    return books
 
-def retrieve_librarian_for_library(library_name):
+# Retrieve the librarian for a library
+def librarian_for_library(library_name):
     library = Library.objects.get(name=library_name)
     librarian = Librarian.objects.get(library=library)
-    print(librarian.name)
+    return librarian
 
 if __name__ == "__main__":
-    # Example queries
-    query_all_books_by_author('J.K. Rowling')
-    list_all_books_in_library('Central Library')
-    retrieve_librarian_for_library('Central Library')
+    # Example usage
+    print("Books by Author 'John Doe':")
+    for book in books_by_author('John Doe'):
+        print(book.title)
+
+    print("\nBooks in Library 'Central Library':")
+    for book in books_in_library('Central Library'):
+        print(book.title)
+
+    print("\nLibrarian for Library 'Central Library':")
+    librarian = librarian_for_library('Central Library')
+    print(librarian.name)
