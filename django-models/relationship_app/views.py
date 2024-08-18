@@ -24,7 +24,7 @@ urlpatterns = [
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -35,13 +35,11 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')  # Redirect to your home page
+            return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
-class CustomLoginView(LoginView):
-    template_name = 'login.html'
-
-class CustomLogoutView(LogoutView):
-    template_name = 'logout.html'
+@login_required
+def home(request):
+    return render(request, 'home.html')
