@@ -3,6 +3,8 @@ from .views import list_books, LibraryDetailView, register  # Ensure 'register' 
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('relationship/', include('relationship_app.urls')),
     path('book/add/', add_book, name='add_book'),
     path('book/<int:book_id>/edit/', edit_book, name='edit_book'),
     path('book/<int:book_id>/delete/', delete_book, name='delete_book'),
