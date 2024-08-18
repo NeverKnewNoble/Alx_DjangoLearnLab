@@ -21,17 +21,27 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
     path('register/', views.register, name='register'),
 ]
-from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.auth.views import LoginView, LogoutView
 
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('list_books')  # Redirect to a page after registration
+            return redirect('home')  # Redirect to your home page
     else:
         form = UserCreationForm()
-    return render(request, 'relationship_app/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+
+class CustomLogoutView(LogoutView):
+    template_name = 'logout.html'
