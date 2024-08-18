@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import list_books, LibraryDetailView, register  # Ensure 'register' is imported
 from django.contrib.auth import views as auth_views
+from .views import add_book, edit_book, delete_book
 
 urlpatterns = [
     path('admin/', admin.site.urls),
