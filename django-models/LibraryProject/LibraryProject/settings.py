@@ -38,10 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookshelf',
+<<<<<<< HEAD
     'relationship_app',  # Add this line
 ]
 
 
+=======
+    'relationship_app',
+    
+]
+
+>>>>>>> 59cc9d3a13b52904331490098da726502a01553f
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
