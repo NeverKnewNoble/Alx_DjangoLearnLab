@@ -24,3 +24,29 @@ def book_delete(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     # Logic for deleting a book
     pass
+
+# bookshelf/views.py
+
+from django.shortcuts import render, get_object_or_404
+from .models import Book
+
+def search_books(request):
+    query = request.GET.get('q', '')
+    # Use Django ORM to prevent SQL injection
+    books = Book.objects.filter(title__icontains=query)
+    return render(request, 'bookshelf/book_list.html', {'books': books})
+
+# bookshelf/views.py
+
+from .forms import BookSearchForm
+
+def search_books(request):
+    form = BookSearchForm(request.GET)
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        books = Book.objects.filter(title__icontains=query)
+    else:
+        books = Book.objects.none()
+    return render(request, 'bookshelf/book_list.html', {'books': books, 'form': form})
+
+
