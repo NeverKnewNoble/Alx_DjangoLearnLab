@@ -154,6 +154,8 @@ CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
 # Enable XSS protection
 SECURE_BROWSER_XSS_FILTER = True  # Prevents XSS attacks
 
+# Trust the X-Forwarded-Proto header for HTTPS connections
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Redirect all HTTP requests to HTTPS
 SECURE_SSL_REDIRECT = True
