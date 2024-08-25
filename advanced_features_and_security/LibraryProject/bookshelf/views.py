@@ -50,3 +50,21 @@ def search_books(request):
     return render(request, 'bookshelf/book_list.html', {'books': books, 'form': form})
 
 
+from django.shortcuts import render
+from .forms import ExampleForm
+
+def example_view(request):
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Process the form data
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            # Perform any actions you need here, like saving data to a database
+            return render(request, 'bookshelf/success.html', {'form': form})
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/form_example.html', {'form': form})
+
