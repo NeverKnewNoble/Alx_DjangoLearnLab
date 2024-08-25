@@ -153,3 +153,21 @@ CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
 
 # Enable XSS protection
 SECURE_BROWSER_XSS_FILTER = True  # Prevents XSS attacks
+
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# Set the HSTS policy to instruct browsers to only access the site via HTTPS
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Secure cookies over HTTPS only
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Additional security headers
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
