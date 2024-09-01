@@ -5,8 +5,8 @@ from .views import BookList
 from rest_framework.authtoken.views import obtain_auth_token
 
 # Create router and register viewsets
-router = DefaultRouter()
-router.register(r'books', BookList, basename='book')
+# router = DefaultRouter()
+# router.register(r'books', BookViewSet, basename='book')
 
 # Define URL patterns
 urlpatterns = [
