@@ -1,7 +1,10 @@
 from django.contrib import admin
 from .models import Book
+<<<<<<< HEAD
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
+=======
+>>>>>>> 575d54c4aa0fd29d7edaff798bcbc16292a9012c
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -9,6 +12,15 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author')
     list_filter = ('publication_year',)
 
+<<<<<<< HEAD
+=======
+    # users/admin.py
+
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+
+>>>>>>> 575d54c4aa0fd29d7edaff798bcbc16292a9012c
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
     list_display = ['username', 'email', 'date_of_birth', 'is_staff']
