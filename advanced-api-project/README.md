@@ -70,3 +70,19 @@ You can search books by title or author:
 You can order books by title or publication year:
 - `/api/books/?ordering=title`
 - `/api/books/?ordering=-publication_year` (for descending order)
+
+## Testing API Endpoints
+
+### Test Cases
+- **Create Book**: Tests if a new book can be created successfully.
+- **Retrieve Book List**: Verifies that the book list endpoint returns the correct books.
+- **Update Book**: Ensures that book updates are saved and reflected correctly.
+- **Delete Book**: Confirms that books can be deleted successfully.
+- **Filter Books**: Tests the filtering functionality to retrieve books based on query parameters.
+- **Search Books**: Verifies that the search functionality works as expected.
+- **Order Books**: Tests ordering by specified fields.
+
+### Running Tests
+Run the following command to execute tests:
+```bash
+python manage.py test api
