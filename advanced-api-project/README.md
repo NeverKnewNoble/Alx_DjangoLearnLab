@@ -51,3 +51,22 @@ The following endpoints provide CRUD functionality for managing the `Book` and `
    **Description:**  
    - Allows an authenticated user to delete a book.
    - Uses `IsAuthenticated` permission to ensure that only authorized users can delete a book.
+
+
+## API Query Parameters
+
+### Filtering
+You can filter books by title, author, and publication year:
+- `/api/books/?title=exampletitle`
+- `/api/books/?author=authorname`
+- `/api/books/?publication_year=2022`
+
+### Searching
+You can search books by title or author:
+- `/api/books/?search=exampletitle`
+- `/api/books/?search=authorname`
+
+### Ordering
+You can order books by title or publication year:
+- `/api/books/?ordering=title`
+- `/api/books/?ordering=-publication_year` (for descending order)
