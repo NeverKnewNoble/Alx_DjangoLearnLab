@@ -34,7 +34,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
+        if request.method == 'POST':
+            return super().post(request, *args, **kwargs)
+        return redirect('post_list')
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -47,7 +49,9 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
+        if request.method == 'POST':
+            return super().post(request, *args, **kwargs)
+        return redirect('post_list')
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
@@ -59,7 +63,9 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == post.author
 
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
+        if request.method == 'POST':
+            return super().post(request, *args, **kwargs)
+        return redirect('post_list')
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
@@ -72,10 +78,9 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse_lazy('post_detail', kwargs={'pk': self.kwargs['post_id']})
+        if request.method == 'POST':
+            return super().post(request, *args, **kwargs)
+        return redirect('post_detail', pk=self.kwargs['post_id'])
 
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
@@ -87,10 +92,9 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == comment.author
 
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse_lazy('post_detail', kwargs={'pk': self.object.post.pk})
+        if request.method == 'POST':
+            return super().post(request, *args, **kwargs)
+        return redirect('post_detail', pk=self.object.post.pk)
 
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
@@ -101,10 +105,9 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == comment.author
 
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
-
-    def get_success_url(self):
-        return reverse_lazy('post_detail', kwargs={'pk': self.object.post.pk})
+        if request.method == 'POST':
+            return super().post(request, *args, **kwargs)
+        return redirect('post_detail', pk=self.object.post.pk)
 
 class PostByTagListView(ListView):
     model = Post
