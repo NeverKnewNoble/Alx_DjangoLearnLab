@@ -73,8 +73,12 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'apex predator',          # Replace with your database name
+        'USER': 'sasuke uchiha',          # Replace with your database user
+        'PASSWORD': '1234',  # Replace with your database password
+        'HOST': 'localhost',             # Set to your database host, or leave as 'localhost'
+        'PORT': '5432',                  # Default PostgreSQL port
     }
 }
 
