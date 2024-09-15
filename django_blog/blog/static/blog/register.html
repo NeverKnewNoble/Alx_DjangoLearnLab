@@ -1,5 +1,6 @@
 <form method="post">
     {% csrf_token %}
+    {% load static %}
     {{ form.as_p }}
     <button type="submit">Register</button>
 </form>
