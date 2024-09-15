@@ -1,9 +1,9 @@
 from django import forms
-from taggit.forms import TagField  # Import TagField for handling tags
+from taggit.forms import TagWidget  # Import TagWidget for tag input
 from .models import Post, Comment
 
 class PostForm(forms.ModelForm):
-    tags = TagField(required=False)  # Use TagField for tag input
+    tags = forms.CharField(widget=TagWidget(), required=False)  # Use TagWidget for tag input
 
     class Meta:
         model = Post
