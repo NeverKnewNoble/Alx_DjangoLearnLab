@@ -1,3 +1,4 @@
+# blog/forms.py
 from django import forms
 from taggit.forms import TagWidget  # Import TagWidget for tag input
 from .models import Post, Comment
