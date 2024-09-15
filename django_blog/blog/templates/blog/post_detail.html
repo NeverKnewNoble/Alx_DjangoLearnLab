@@ -1,0 +1,24 @@
+<!-- blog/templates/blog/post_detail.html -->
+{% extends 'blog/base.html' %}
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.content }}</p>
+
+  <h2>Comments</h2>
+  <ul>
+    {% for comment in post.comments.all %}
+      <li>
+        <p><strong>{{ comment.author }}:</strong> {{ comment.content }}</p>
+        {% if user == comment.author %}
+          <a href="{% url 'edit_comment' pk=comment.pk %}">Edit</a>
+          <a href="{% url 'delete_comment' pk=comment.pk %}">Delete</a>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No comments yet.</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Add a Comment</h2>
+  <a href="{% url 'add_comment' post_id=post.pk %}">Add Comment</a>
+{% endblock %}
