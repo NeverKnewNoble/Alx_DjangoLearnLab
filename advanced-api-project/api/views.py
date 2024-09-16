@@ -38,4 +38,8 @@ class BookUpdateView(generics.UpdateAPIView):
 class BookDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+<<<<<<< HEAD
     permission_classes = [IsAuthenticated]  # Only authenticated users can delete books
+=======
+    permission_classes = [IsAuthenticated]  # Only authenticated users can delete books
+>>>>>>> fd5e79e913c4fcb890c01c5a94e4a928995d63e7
